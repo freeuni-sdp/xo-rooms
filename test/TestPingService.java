@@ -14,13 +14,10 @@ public class TestPingService extends JerseyTest{
 	protected Application configure() {
 		return new ResourceConfig(PingService.class);
 	}
-	
+
 	@Test
 	public void testGet() {
 		Response actual = target("ping").request().get();
-		assertEquals(
-		        Response.Status.OK.getStatusCode(),
-		        actual.getStatus());
+		assertEquals(Response.Status.OK.getStatusCode(),actual.getStatus());
 	}
-
 }
