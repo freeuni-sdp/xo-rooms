@@ -2,5 +2,5 @@ language: java
 
 deploy:
    provider: heroku
-   api_key: "440a2588-9c2a-4650-816f-95e0bf646a96"
+   api_key: "3dfa7d00-8689-412e-86e5-1ec0d2d42f2c"
    app: xo-rooms
