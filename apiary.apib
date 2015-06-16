@@ -1,0 +1,68 @@
+FORMAT: 1A
+HOST: http://xo-rooms.herokuapp.com/
+
+# xo-rooms
+xo-rooms is an API for managing rooms.
+
+# rooms [/{?token}]
++ token (required,string) - user token
+
+## Get All rooms [GET]
+
+Returns json array of rooms.
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "rooms": [
+                    {
+                        "room": 1,
+                        "x_user": 1,
+                        "o_user": 2
+                    }, {
+                        "room": 2,
+                        "x_user": 3,
+                        "o_user": 4
+                    }
+                ]
+            }
+# Concrette room [/{room_id}{?token}]
++ room_id (required,number) - room id
+
+## Get Concrete Room [GET]
+
+Returns json of room.
+
++ token (required,string) - user token
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "x_user": 1,
+                "o_user": 2
+            }
+
+## Join Room [POST]
+
+Joins room 
+
++ room_id (required,number) - room id
++ token (required,string) - user token
+
++ Response 201
++ Response 404
++ Response 409
+
+# Leave Room [/{room_id}/{user_id}{?token}]
++ room_id (required,number) - room id
++ user_id (required, string) - user id
++ token (required,string) - user token
+    
+## Leave Room [DELETE]
+Leaves room
+
+
++ Response 201
++ Response 404
