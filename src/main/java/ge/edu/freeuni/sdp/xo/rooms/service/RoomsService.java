@@ -61,9 +61,13 @@ public class RoomsService {
 		}
 	}
 	
-	@DELETE
 	@Path("{room_id}/{user_id}")
-	public Response leaveRoom(@PathParam("room_id") int roomId, @PathParam("user_id") int userId, @QueryParam("token") String token){
+	@DELETE
+	public Response leaveRoom(
+			@PathParam("room_id") int roomId, 
+			@PathParam("user_id") int userId, 
+			@QueryParam("token") String token){
+		
 		Room room = getRepository().find(roomId);
 		if(room == null)
 			return Response.status(Status.NOT_FOUND).build();
