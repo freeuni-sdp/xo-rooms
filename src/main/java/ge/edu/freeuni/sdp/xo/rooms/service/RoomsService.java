@@ -76,7 +76,7 @@ public class RoomsService {
 			return Response.ok().build();
 		}else if(room.geto_user() == userId){
 			room.seto_user(null);
-			return Response.status(Status.NOT_FOUND).build();
+			return Response.ok().build();
 		}else
 			return Response.status(Status.NOT_FOUND).build();
 	}
