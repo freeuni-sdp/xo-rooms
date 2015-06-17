@@ -57,13 +57,13 @@ public class RoomsService {
 		if(room.getx_user() == null){
 			String x_user = "1"; //TODO get real userID from auth service
 			room.setx_user(x_user);
-			URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
-			return Response.accepted(uri).build();
+			final URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
+			return Response.created(uri).entity(room).build();
 		}else if(room.geto_user() == null){
 			String o_user = "2"; //TODO get real userID from auth service
 			room.seto_user(o_user);
 			URI uri = uriInfo.getAbsolutePathBuilder().path(o_user).build();
-			return Response.accepted(uri).build();
+			return Response.created(uri).entity(room).build();
 		}else{
 			return Response.status(Status.CONFLICT).build();
 		}
