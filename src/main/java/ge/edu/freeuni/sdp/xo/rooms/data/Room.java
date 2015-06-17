@@ -17,7 +17,7 @@ public class Room {
 	/**
 	 * @param id
 	 * @param x_user
-	 * @param oUserId
+	 * @param o_user
 	 */
 	public Room(int id, Integer x_user, Integer o_user) {
 		this.id = id;
