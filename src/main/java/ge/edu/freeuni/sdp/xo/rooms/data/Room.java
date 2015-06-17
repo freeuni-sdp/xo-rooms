@@ -49,13 +49,13 @@ public class Room {
 		this.x_user = x_user;
 	}
 	/**
-	 * @return the oUserId
+	 * @return the o_user
 	 */
 	public int getoUserId() {
 		return o_user;
 	}
 	/**
-	 * @param oUserId the oUserId to set
+	 * @param o_user the o_user to set
 	 */
 	public void setoUserId(Integer o_user) {
 		this.o_user = o_user;
