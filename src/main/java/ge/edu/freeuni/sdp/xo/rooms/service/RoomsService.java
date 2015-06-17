@@ -1,18 +1,24 @@
 package ge.edu.freeuni.sdp.xo.rooms.service;
 
+import java.net.URI;
 import java.util.*;
 
 import ge.edu.freeuni.sdp.xo.rooms.data.*;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 
 
 @Path("")
 @Produces( { MediaType.APPLICATION_JSON})
 public class RoomsService {
+	
+	@Context
+	UriInfo uriInfo;
 	
 	public Repository getRepository(){
 		return FakeRepositoryFactory.createInMemoryRepository();
@@ -49,13 +55,15 @@ public class RoomsService {
 		}
 		
 		if(room.getx_user() == null){
-			int x_user = 1; //TODO get real userID from auth service
+			String x_user = "1"; //TODO get real userID from auth service
 			room.setx_user(x_user);
-			return Response.ok(room).build();
+			URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
+			return Response.accepted(uri).entity(room).build();
 		}else if(room.geto_user() == null){
-			int o_user = 2; //TODO get real userID from auth service
+			String o_user = "2"; //TODO get real userID from auth service
 			room.seto_user(o_user);
-			return Response.ok(room).build();
+			URI uri = uriInfo.getAbsolutePathBuilder().path(o_user).build();
+			return Response.accepted(uri).entity(room).build();
 		}else{
 			return Response.status(Status.CONFLICT).build();
 		}
@@ -65,16 +73,16 @@ public class RoomsService {
 	@DELETE
 	public Response leaveRoom(
 			@PathParam("room_id") int roomId, 
-			@PathParam("user_id") int userId, 
+			@PathParam("user_id") String userId, 
 			@QueryParam("token") String token){
 		
 		Room room = getRepository().find(roomId);
 		if(room == null)
 			return Response.status(Status.NOT_FOUND).build();
-		if(room.getx_user() == (Integer)userId){
+		if(room.getx_user() != null &&  room.getx_user().equals(userId)){
 			room.setx_user(null);
 			return Response.ok().build();
-		}else if(room.geto_user() == (Integer)userId){
+		}else if(room.geto_user() != null && room.geto_user().equals(userId)){
 			room.seto_user(null);
 			return Response.ok().build();
 		}else

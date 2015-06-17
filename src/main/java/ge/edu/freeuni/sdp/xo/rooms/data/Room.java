@@ -13,17 +13,17 @@ public class Room {
 	private int id;
 	
 	@XmlElement(nillable=true)
-	private Integer x_user;
+	private String x_user;
 	
 	@XmlElement(nillable=true)
-	private Integer o_user;
+	private String o_user;
 	
 	/**
 	 * @param id
 	 * @param x_user
 	 * @param o_user
 	 */
-	public Room(int id, Integer x_user, Integer o_user) {
+	public Room(int id, String x_user, String o_user) {
 		this.id = id;
 		this.x_user = x_user;
 		this.o_user = o_user;
@@ -46,28 +46,28 @@ public class Room {
 	/**
 	 * @return the x_user
 	 */
-	public Integer getx_user() {
+	public String getx_user() {
 		return x_user;
 	}
 	
 	/**
 	 * @param x_user the x_user to set
 	 */
-	public void setx_user(Integer x_user) {
+	public void setx_user(String x_user) {
 		this.x_user = x_user;
 	}
 	
 	/**
 	 * @return the o_user
 	 */
-	public Integer geto_user() {
+	public String geto_user() {
 		return o_user;
 	}
 	
 	/**
 	 * @param o_user the o_user to set
 	 */
-	public void seto_user(Integer o_user) {
+	public void seto_user(String o_user) {
 		this.o_user = o_user;
 	}	
 }
