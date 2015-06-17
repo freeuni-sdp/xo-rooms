@@ -10,16 +10,16 @@ public class Room {
 	private int id;
 	
 	@XmlElement
-	private Integer xUserId;
+	private int xUserId;
 	
 	@XmlElement
-	private Integer oUserId;
+	private int oUserId;
 	/**
 	 * @param id
 	 * @param xUserId
 	 * @param oUserId
 	 */
-	public Room(int id, Integer xUserId, Integer oUserId) {
+	public Room(int id, int xUserId, int oUserId) {
 		this.id = id;
 		this.xUserId = xUserId;
 		this.oUserId = oUserId;
@@ -45,7 +45,7 @@ public class Room {
 	/**
 	 * @param xUserId the xUserId to set
 	 */
-	public void setxUserId(Integer xUserId) {
+	public void setxUserId(int xUserId) {
 		this.xUserId = xUserId;
 	}
 	/**
@@ -57,7 +57,7 @@ public class Room {
 	/**
 	 * @param oUserId the oUserId to set
 	 */
-	public void setoUserId(Integer oUserId) {
+	public void setoUserId(int oUserId) {
 		this.oUserId = oUserId;
 	}
 	
