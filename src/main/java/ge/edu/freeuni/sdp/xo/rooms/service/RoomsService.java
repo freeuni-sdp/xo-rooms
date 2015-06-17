@@ -39,4 +39,26 @@ public class RoomsService {
 		
 		return Response.ok(room).build();
 	}
+	
+	@POST
+	@Path("{room_id}")
+	public Response joinRoom(@PathParam("room_id") int id, @QueryParam("token") String token){
+		Room room = getRepository().find(id);
+		
+		if(room == null){
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		if(room.getx_user() == null){
+			int x_user = 1; //TODO get real userID from auth service
+			room.setx_user(x_user);
+			return Response.ok().build();
+		}else if(room.geto_user() == null){
+			int o_user = 2; //TODO get real userID from auth service
+			room.seto_user(o_user);
+			return Response.ok().build();
+		}else{
+			return Response.status(Status.CONFLICT).build();
+		}
+	}
 }
