@@ -6,13 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Room {
 	
-	@XmlElement
 	private int id;
 	
-	@XmlElement(nillable=true)
-	private Integer x_user;
 	
-	@XmlElement(nillable=true)
+	private Integer x_user;
 	private Integer o_user;
 	/**
 	 * @param id
@@ -27,6 +24,7 @@ public class Room {
 	/**
 	 * @return the id
 	 */
+	@XmlElement
 	public int getId() {
 		return id;
 	}
@@ -39,6 +37,7 @@ public class Room {
 	/**
 	 * @return the x_user
 	 */
+	@XmlElement(nillable=true)
 	public int getx_user() {
 		return x_user;
 	}
@@ -51,6 +50,7 @@ public class Room {
 	/**
 	 * @return the o_user
 	 */
+	@XmlElement(nillable=true)
 	public int geto_user() {
 		return o_user;
 	}
