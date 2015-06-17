@@ -9,20 +9,20 @@ public class Room {
 	@XmlElement
 	private int id;
 	
-	@XmlElement
-	private int xUserId;
+	@XmlElement(nillable=true)
+	private Integer x_user;
 	
-	@XmlElement
-	private int oUserId;
+	@XmlElement(nillable=true)
+	private Integer o_user;
 	/**
 	 * @param id
 	 * @param xUserId
 	 * @param oUserId
 	 */
-	public Room(int id, int xUserId, int oUserId) {
+	public Room(int id, Integer x_user, Integer o_user) {
 		this.id = id;
-		this.xUserId = xUserId;
-		this.oUserId = oUserId;
+		this.x_user = x_user;
+		this.o_user = o_user;
 	}
 	/**
 	 * @return the id
@@ -40,25 +40,25 @@ public class Room {
 	 * @return the xUserId
 	 */
 	public int getxUserId() {
-		return xUserId;
+		return x_user;
 	}
 	/**
 	 * @param xUserId the xUserId to set
 	 */
-	public void setxUserId(int xUserId) {
-		this.xUserId = xUserId;
+	public void setxUserId(Integer x_user) {
+		this.x_user = x_user;
 	}
 	/**
 	 * @return the oUserId
 	 */
 	public int getoUserId() {
-		return oUserId;
+		return o_user;
 	}
 	/**
 	 * @param oUserId the oUserId to set
 	 */
-	public void setoUserId(int oUserId) {
-		this.oUserId = oUserId;
+	public void setoUserId(Integer o_user) {
+		this.o_user = o_user;
 	}
 	
 	
