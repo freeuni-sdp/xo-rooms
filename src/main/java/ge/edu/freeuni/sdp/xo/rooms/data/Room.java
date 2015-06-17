@@ -16,7 +16,7 @@ public class Room {
 	private Integer o_user;
 	/**
 	 * @param id
-	 * @param xUserId
+	 * @param x_user
 	 * @param oUserId
 	 */
 	public Room(int id, Integer x_user, Integer o_user) {
@@ -37,13 +37,13 @@ public class Room {
 		this.id = id;
 	}
 	/**
-	 * @return the xUserId
+	 * @return the x_user
 	 */
 	public int getxUserId() {
 		return x_user;
 	}
 	/**
-	 * @param xUserId the xUserId to set
+	 * @param x_user the x_user to set
 	 */
 	public void setxUserId(Integer x_user) {
 		this.x_user = x_user;
