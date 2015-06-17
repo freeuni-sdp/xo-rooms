@@ -71,10 +71,10 @@ public class RoomsService {
 		Room room = getRepository().find(roomId);
 		if(room == null)
 			return Response.status(Status.NOT_FOUND).build();
-		if(room.getx_user() == userId){
+		if(room.getx_user() == (Integer)userId){
 			room.setx_user(null);
 			return Response.ok().build();
-		}else if(room.geto_user() == userId){
+		}else if(room.geto_user() == (Integer)userId){
 			room.seto_user(null);
 			return Response.ok().build();
 		}else
