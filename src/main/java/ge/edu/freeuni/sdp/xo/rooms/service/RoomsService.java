@@ -78,6 +78,6 @@ public class RoomsService {
 			room.seto_user(null);
 			return Response.ok().build();
 		}else
-			return Response.status(Status.NOT_FOUND).build();
+			return Response.ok().build();
 	}
 }
