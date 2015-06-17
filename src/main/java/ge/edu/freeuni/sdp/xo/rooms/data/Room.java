@@ -39,25 +39,25 @@ public class Room {
 	/**
 	 * @return the x_user
 	 */
-	public int getxUserId() {
+	public int getx_user() {
 		return x_user;
 	}
 	/**
 	 * @param x_user the x_user to set
 	 */
-	public void setxUserId(Integer x_user) {
+	public void setx_user(Integer x_user) {
 		this.x_user = x_user;
 	}
 	/**
 	 * @return the o_user
 	 */
-	public int getoUserId() {
+	public int geto_user() {
 		return o_user;
 	}
 	/**
 	 * @param o_user the o_user to set
 	 */
-	public void setoUserId(Integer o_user) {
+	public void seto_user(Integer o_user) {
 		this.o_user = o_user;
 	}
 	
