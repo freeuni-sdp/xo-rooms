@@ -1,4 +1,4 @@
-package ge.edu.freeuni.sdp.xo.rooms;
+package ge.edu.freeuni.sdp.xo.rooms.service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
