@@ -61,4 +61,20 @@ public class RoomsService {
 			return Response.status(Status.CONFLICT).build();
 		}
 	}
+	
+	@DELETE
+	@Path("{room_id}/{user_id}")
+	public Response leaveRoom(@PathParam("room_id") int roomId, @PathParam("user_id") int userId, @QueryParam("token") String token){
+		Room room = getRepository().find(roomId);
+		if(room == null)
+			return Response.status(Status.NOT_FOUND).build();
+		if(room.getx_user() == userId){
+			room.setx_user(null);
+			return Response.ok().build();
+		}else if(room.geto_user() == userId){
+			room.seto_user(null);
+			return Response.status(Status.NOT_FOUND).build();
+		}else
+			return Response.status(Status.NOT_FOUND).build();
+	}
 }
