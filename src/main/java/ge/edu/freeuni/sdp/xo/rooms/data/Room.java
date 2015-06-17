@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Room {
 	
 	@XmlElement
-	private int room;
+	private int id;
 	
 	@XmlElement(nillable=true)
 	private Integer x_user;
@@ -24,7 +24,7 @@ public class Room {
 	 * @param o_user
 	 */
 	public Room(int id, Integer x_user, Integer o_user) {
-		this.room = id;
+		this.id = id;
 		this.x_user = x_user;
 		this.o_user = o_user;
 	}
@@ -33,14 +33,14 @@ public class Room {
 	 * @return the id
 	 */
 	public int getId() {
-		return room;
+		return id;
 	}
 	
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.room = id;
+		this.id = id;
 	}
 	
 	/**
