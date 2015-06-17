@@ -6,6 +6,8 @@ import ge.edu.freeuni.sdp.xo.rooms.data.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 
 @Path("")
@@ -28,7 +30,13 @@ public class RoomsService {
 	
 	@GET
 	@Path("{room_id}")
-	public Room getConcreteRoom(@PathParam("room_id") int id, @QueryParam("token") String token){
-		return getRepository().find(id);
+	public Response getConcreteRoom(@PathParam("room_id") int id, @QueryParam("token") String token){
+		Room room = getRepository().find(id);
+		
+		if(room == null){
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		return Response.ok(room).build();
 	}
 }
