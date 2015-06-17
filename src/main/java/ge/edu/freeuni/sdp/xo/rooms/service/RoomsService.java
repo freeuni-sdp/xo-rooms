@@ -18,10 +18,17 @@ public class RoomsService {
 	}
 	
 	@GET
-	public List<Room> getAllRooms(){
+	public List<Room> getAllRooms(@QueryParam("token") String token){
 		final ArrayList<Room> result = new ArrayList<Room>();
 		for (Room room : getRepository().getAll())
 			result.add(room);
 		return result;
+	}
+	
+	
+	@GET
+	@Path("{room_id}")
+	public Room getConcreteRoom(@PathParam("room_id") int id, @QueryParam("token") String token){
+		return getRepository().find(id);
 	}
 }
