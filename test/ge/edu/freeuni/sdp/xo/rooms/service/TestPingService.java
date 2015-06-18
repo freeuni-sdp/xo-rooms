@@ -1,3 +1,5 @@
+package ge.edu.freeuni.sdp.xo.rooms.service;
+
 import static org.junit.Assert.*;
 import ge.edu.freeuni.sdp.xo.rooms.service.PingService;
 
