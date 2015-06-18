@@ -19,7 +19,7 @@ public class TestPingService extends JerseyTest{
 
 	@Test
 	public void testGet() {
-		Response actual = target("ping").request().get();
+		Response actual = target("webapi/ping").request().get();
 		assertEquals(Response.Status.OK.getStatusCode(),actual.getStatus());
 	}
 }
