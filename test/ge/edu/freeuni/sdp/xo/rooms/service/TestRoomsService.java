@@ -11,19 +11,15 @@ public class TestRoomsService extends JerseyTest{
 
 	@Override
 	protected Application configure() {
-		return new ResourceConfig(PingService.class);
+		return new ResourceConfig(RoomsService.class);
 	}
 
-	
-	@Test
-	public void testGetRepository() {
-		
-	}
 
 	@Test
 	public void testGetAllRooms() {
-		
-	}
+
+    }
+	
 
 	@Test
 	public void testGetConcreteRoom() {
