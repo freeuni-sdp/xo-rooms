@@ -117,18 +117,19 @@ public class RoomsService {
 	}
 
 	protected String getIdFromToken(String token) {
-		if (token == null)
-			return null;
-
-		Client client = ClientBuilder.newClient(new ClientConfig());
-		ClientResponse response = client.target(LOGIN_SERVICE + "?token=" + token).request()
-				.get(ClientResponse.class);
-		if(response.getStatus() != Status.OK.getStatusCode())
-			return null;
-		
-		UserName username = response.readEntity(UserName.class);
-		
-		return username.username;
+//		if (token == null)
+//			return null;
+//
+//		Client client = ClientBuilder.newClient(new ClientConfig());
+//		ClientResponse response = client.target(LOGIN_SERVICE + "?token=" + token).request()
+//				.get(ClientResponse.class);
+//		if(response.getStatus() != Status.OK.getStatusCode())
+//			return null;
+//		
+//		UserName username = response.readEntity(UserName.class);
+//		
+//		return username.username;
+		return "1";
 	}
 
 	protected Repository getRepository() {
