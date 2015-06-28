@@ -32,8 +32,8 @@ public class RoomsService {
 			throws StorageException {
 		if (isTokenValid(token)) {
 			final ArrayList<Room> result = new ArrayList<Room>();
-			for (Room room : getRepository().getAll())
-				result.add(room);
+			for (RoomEntity roomEntity : getRepository().getAll())
+				result.add(roomEntity.getRoom());
 			return Response.ok(result).build();
 		} else
 			return Response.status(Status.FORBIDDEN).build();
@@ -45,13 +45,13 @@ public class RoomsService {
 	public Response getConcreteRoom(@PathParam("room_id") String id,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {
-			Room room = getRepository().find(id);
+			RoomEntity roomEntity = getRepository().find(id);
 
-			if (room == null) {
+			if (roomEntity == null) {
 				return Response.status(Status.NOT_FOUND).build();
 			}
 
-			return Response.ok(room).build();
+			return Response.ok(roomEntity.getRoom()).build();
 		} else
 			return Response.status(Status.FORBIDDEN).build();
 	}
@@ -61,24 +61,27 @@ public class RoomsService {
 	public Response joinRoom(@PathParam("room_id") String id,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {
-			Room room = getRepository().find(id);
+			RoomEntity roomEntity = getRepository().find(id);
 
-			if (room == null) {
+			if (roomEntity == null) {
 				return Response.status(Status.NOT_FOUND).build();
 			}
 
-			if (room.getx_user() == null) {
+			if (roomEntity.getx_user() == null) {
 
 				String x_user = getIdFromToken(token);
-				room.setx_user(x_user);
-				final URI uri = uriInfo.getAbsolutePathBuilder().path(x_user)
+				roomEntity.setx_user(x_user);
+				getRepository().insertOrUpdate(roomEntity);
+				URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
+				return Response.created(uri).entity(roomEntity.getRoom())
 						.build();
-				return Response.created(uri).entity(room).build();
-			} else if (room.geto_user() == null) {
+			} else if (roomEntity.geto_user() == null) {
 				String o_user = getIdFromToken(token);
-				room.seto_user(o_user);
+				roomEntity.seto_user(o_user);
+				getRepository().insertOrUpdate(roomEntity);
 				URI uri = uriInfo.getAbsolutePathBuilder().path(o_user).build();
-				return Response.created(uri).entity(room).build();
+				return Response.created(uri).entity(roomEntity.getRoom())
+						.build();
 			} else {
 				return Response.status(Status.CONFLICT).build();
 			}
@@ -92,15 +95,19 @@ public class RoomsService {
 			@PathParam("user_id") String userId,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {
-			Room room = getRepository().find(roomId);
-			if (room == null)
+			RoomEntity roomEntity = getRepository().find(roomId);
+			if (roomEntity == null)
 				return Response.status(Status.NOT_FOUND).build();
-			if (room.getx_user() != null && room.getx_user().equals(userId)) {
-				room.setx_user(null);
+
+			if (roomEntity.getx_user() != null
+					&& roomEntity.getx_user().equals(userId)) {
+				roomEntity.setx_user(null);
+				getRepository().insertOrUpdate(roomEntity);
 				return Response.ok().build();
-			} else if (room.geto_user() != null
-					&& room.geto_user().equals(userId)) {
-				room.seto_user(null);
+			} else if (roomEntity.geto_user() != null
+					&& roomEntity.geto_user().equals(userId)) {
+				roomEntity.seto_user(null);
+				getRepository().insertOrUpdate(roomEntity);
 				return Response.ok().build();
 			} else
 				return Response.ok().build();
@@ -109,6 +116,9 @@ public class RoomsService {
 	}
 
 	protected String getIdFromToken(String token) {
+		if (token == null)
+			return null;
+
 		Client client = ClientBuilder.newClient(new ClientConfig());
 		UserName response = client.target(LOGIN_SERVICE + token).request()
 				.get(UserName.class);

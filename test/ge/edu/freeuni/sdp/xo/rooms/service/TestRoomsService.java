@@ -30,9 +30,9 @@ public class TestRoomsService extends JerseyTest{
 		List<Room> actual = response.readEntity(new GenericType<List<Room>>(){});
 		
 		List<Room> expected = new ArrayList<Room>();
-		expected.add(new Room("3", "1", "2"));
-		expected.add(new Room("2", "1", null));
-		expected.add(new Room("1", null, null));
+		expected.add(new Room("3333333333", "1", "2"));
+		expected.add(new Room("2222222222", "1", null));
+		expected.add(new Room("1111111111", null, null));
 		
 		assertTrue(compareLists(actual, expected));
     }
@@ -40,10 +40,10 @@ public class TestRoomsService extends JerseyTest{
 
 	@Test
 	public void testGetConcreteRoomExistent() {
-		Response response = target("/2").request().get(Response.class);
+		Response response = target("/2222222222").request().get(Response.class);
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room("2", "1", null);
+		Room expected = new Room("2222222222", "1", null);
 		
 		assertEquals(expected, actual);
 	}
@@ -56,20 +56,20 @@ public class TestRoomsService extends JerseyTest{
 
 	@Test
 	public void testJoinRoomFull() {
-		Response response = target("/3").request().post(null, Response.class);
+		Response response = target("/3333333333").request().post(null, Response.class);
 		
 		assertEquals(Status.CONFLICT.getStatusCode(), response.getStatus());		
 	}
 	
 	@Test
 	public void testJoinRoomEmpty() {
-		Response response = target("/1").request().post(null, Response.class);
+		Response response = target("/1111111111").request().post(null, Response.class);
 		
 		assertEquals(Status.CREATED.getStatusCode(), response.getStatus());	
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room("1", "1", null);
+		Room expected = new Room("1111111111", "1", null);
 		
 		assertEquals(expected, actual);
 	}
@@ -84,31 +84,35 @@ public class TestRoomsService extends JerseyTest{
 
 	@Test
 	public void testLeaveRoomJoined() {
-		Response response = target("/2/1").request().delete(Response.class);
+		Response response = target("/2222222222/1").request().delete(Response.class);
 		
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		
 		
-		response = target("/2").request().get(Response.class);
+		response = target("/2222222222").request().get(Response.class);
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room("2", null, null);
+		Room expected = new Room("2222222222", null, null);
+		
+		System.err.println(actual.getId() + " -> " + expected.getId());
+		System.err.println(actual.getx_user() + " -> " + expected.getx_user());
+		System.err.println(actual.geto_user() + " -> " + expected.geto_user());
 		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testLeaveRoomNotJoined() {
-		Response response = target("2/2").request().delete(Response.class);
+		Response response = target("2222222222/2").request().delete(Response.class);
 		
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		
-		response = target("/2").request().get(Response.class);
+		response = target("/2222222222").request().get(Response.class);
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room("2", null, null);
+		Room expected = new Room("2222222222", null, null);
 		
 		assertEquals(expected, actual);
 	}

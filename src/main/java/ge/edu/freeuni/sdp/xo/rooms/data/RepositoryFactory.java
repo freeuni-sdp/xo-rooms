@@ -9,16 +9,16 @@ public class RepositoryFactory {
 		if(repo == null){
 			repo = InMemoryRepository.getInstance();
 		
-			Room empty = new Room("1", null, null);
-			Room one = new Room("2", "1", null);
-			Room full = new Room("3", "1", "2");
+			Room empty = new Room("1111111111", null, null);
+			Room one = new Room(  "2222222222", "1", null);
+			Room full = new Room( "3333333333", "1", "2");
 			
 			try {
-				repo.insertOrUpdate(full);
-				repo.insertOrUpdate(one);
-				repo.insertOrUpdate(empty);
+				repo.insertOrUpdate(RoomEntity.fromRoom(full));
+				repo.insertOrUpdate(RoomEntity.fromRoom(one));
+				repo.insertOrUpdate(RoomEntity.fromRoom(empty));
 			} catch (StorageException e) {
-				//Will never happen
+				e.printStackTrace();
 			}
 		}
 		
