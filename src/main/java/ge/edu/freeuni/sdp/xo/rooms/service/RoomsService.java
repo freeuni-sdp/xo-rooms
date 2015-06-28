@@ -117,8 +117,8 @@ public class RoomsService {
 	}
 
 	protected String getIdFromToken(String token) {
-//		if (token == null)
-//			return null;
+		if (token == null)
+			return null;
 //
 //		Client client = ClientBuilder.newClient(new ClientConfig());
 //		ClientResponse response = client.target(LOGIN_SERVICE + "?token=" + token).request()
