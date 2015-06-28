@@ -42,7 +42,7 @@ public class RoomsService {
 
 	@GET
 	@Path("{room_id}")
-	public Response getConcreteRoom(@PathParam("room_id") int id,
+	public Response getConcreteRoom(@PathParam("room_id") String id,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {
 			Room room = getRepository().find(id);
@@ -58,7 +58,7 @@ public class RoomsService {
 
 	@POST
 	@Path("{room_id}")
-	public Response joinRoom(@PathParam("room_id") int id,
+	public Response joinRoom(@PathParam("room_id") String id,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {
 			Room room = getRepository().find(id);
@@ -88,7 +88,7 @@ public class RoomsService {
 
 	@Path("{room_id}/{user_id}")
 	@DELETE
-	public Response leaveRoom(@PathParam("room_id") int roomId,
+	public Response leaveRoom(@PathParam("room_id") String roomId,
 			@PathParam("user_id") String userId,
 			@QueryParam("token") String token) throws StorageException {
 		if (isTokenValid(token)) {

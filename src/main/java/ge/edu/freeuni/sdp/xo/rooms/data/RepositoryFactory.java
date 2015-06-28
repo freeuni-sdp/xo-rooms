@@ -9,9 +9,9 @@ public class RepositoryFactory {
 		if(repo == null){
 			repo = InMemoryRepository.getInstance();
 		
-			Room empty = new Room(1, null, null);
-			Room one = new Room(2, "1", null);
-			Room full = new Room(3, "1", "2");
+			Room empty = new Room("1", null, null);
+			Room one = new Room("2", "1", null);
+			Room full = new Room("3", "1", "2");
 			
 			try {
 				repo.insertOrUpdate(full);

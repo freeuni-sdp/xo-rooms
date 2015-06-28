@@ -30,9 +30,9 @@ public class TestRoomsService extends JerseyTest{
 		List<Room> actual = response.readEntity(new GenericType<List<Room>>(){});
 		
 		List<Room> expected = new ArrayList<Room>();
-		expected.add(new Room(3, "1", "2"));
-		expected.add(new Room(2, "1", null));
-		expected.add(new Room(1, null, null));
+		expected.add(new Room("3", "1", "2"));
+		expected.add(new Room("2", "1", null));
+		expected.add(new Room("1", null, null));
 		
 		assertTrue(compareLists(actual, expected));
     }
@@ -43,7 +43,7 @@ public class TestRoomsService extends JerseyTest{
 		Response response = target("/2").request().get(Response.class);
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room(2, "1", null);
+		Room expected = new Room("2", "1", null);
 		
 		assertEquals(expected, actual);
 	}
@@ -69,7 +69,7 @@ public class TestRoomsService extends JerseyTest{
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room(1, "1", null);
+		Room expected = new Room("1", "1", null);
 		
 		assertEquals(expected, actual);
 	}
@@ -93,7 +93,7 @@ public class TestRoomsService extends JerseyTest{
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room(2, null, null);
+		Room expected = new Room("2", null, null);
 		
 		assertEquals(expected, actual);
 	}
@@ -108,7 +108,7 @@ public class TestRoomsService extends JerseyTest{
 		
 		Room actual = response.readEntity(Room.class);
 		
-		Room expected = new Room(2, null, null);
+		Room expected = new Room("2", null, null);
 		
 		assertEquals(expected, actual);
 	}

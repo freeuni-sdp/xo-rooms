@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Room {
 	
 	@XmlElement
-	private int id;
+	private String id;
 	
 	@XmlElement(nillable=true)
 	private String x_user;
@@ -28,7 +28,7 @@ public class Room {
 	 * @param x_user
 	 * @param o_user
 	 */
-	public Room(int id, String x_user, String o_user) {
+	public Room(String id, String x_user, String o_user) {
 		this.id = id;
 		this.x_user = x_user;
 		this.o_user = o_user;
@@ -37,14 +37,14 @@ public class Room {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -83,7 +83,7 @@ public class Room {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((o_user == null) ? 0 : o_user.hashCode());
 		result = prime * result + ((x_user == null) ? 0 : x_user.hashCode());
 		return result;
@@ -101,7 +101,10 @@ public class Room {
 		if (getClass() != obj.getClass())
 			return false;
 		Room other = (Room) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (o_user == null) {
 			if (other.o_user != null)
@@ -114,7 +117,8 @@ public class Room {
 		} else if (!x_user.equals(other.x_user))
 			return false;
 		return true;
-	}	
+	}
+
 	
 	
 	

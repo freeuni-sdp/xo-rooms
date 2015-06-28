@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class InMemoryRepository implements Repository {
 	//id -> room
-	private Map<Integer, Room> rooms;
+	private Map<String, Room> rooms;
 	private static InMemoryRepository instance;
 	
 	public static InMemoryRepository getInstance(){
 		if(instance == null)
-			instance = new InMemoryRepository(new HashMap<Integer, Room>());
+			instance = new InMemoryRepository(new HashMap<String, Room>());
 		return instance;
 	}
 	
-	private InMemoryRepository(Map<Integer, Room> rooms) {
+	private InMemoryRepository(Map<String, Room> rooms) {
 		this.rooms = rooms;
 	}
 	
@@ -25,12 +25,12 @@ public class InMemoryRepository implements Repository {
 	}
 
 	@Override
-	public Room delete(int id) {
+	public Room delete(String id) {
 		return rooms.remove(id);
 	}
 
 	@Override
-	public Room find(int id) {
+	public Room find(String id) {
 		return rooms.get(id);
 	}
 
