@@ -15,6 +15,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientResponse;
 
 import com.microsoft.azure.storage.StorageException;
 
@@ -120,9 +121,14 @@ public class RoomsService {
 			return null;
 
 		Client client = ClientBuilder.newClient(new ClientConfig());
-		UserName response = client.target(LOGIN_SERVICE + token).request()
-				.get(UserName.class);
-		return response.username;
+		ClientResponse response = client.target(LOGIN_SERVICE + token).request()
+				.get(ClientResponse.class);
+		if(response.getStatus() != Status.OK.getStatusCode())
+			return null;
+		
+		UserName username = response.readEntity(UserName.class);
+		
+		return username.username;
 	}
 
 	protected Repository getRepository() {
