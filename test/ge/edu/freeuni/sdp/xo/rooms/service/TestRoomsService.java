@@ -2,6 +2,7 @@ package ge.edu.freeuni.sdp.xo.rooms.service;
 
 import static org.junit.Assert.*;
 import ge.edu.freeuni.sdp.xo.rooms.data.Room;
+import ge.edu.freeuni.sdp.xo.rooms.mock.RoomsServiceMock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class TestRoomsService extends JerseyTest{
 
 	@Override
 	protected Application configure() {
-		return new ResourceConfig(RoomsService.class);
+		return new ResourceConfig(RoomsServiceMock.class);
 	}
 
 

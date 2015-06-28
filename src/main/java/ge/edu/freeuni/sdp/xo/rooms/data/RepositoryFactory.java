@@ -1,6 +1,6 @@
 package ge.edu.freeuni.sdp.xo.rooms.data;
 
-public class FakeRepositoryFactory {
+public class RepositoryFactory {
 	private static Repository repo;
 	
 	public static Repository createInMemoryRepository(){
