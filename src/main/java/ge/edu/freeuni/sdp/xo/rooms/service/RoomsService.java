@@ -121,14 +121,18 @@ public class RoomsService {
 			return null;
 
 		Client client = ClientBuilder.newClient(new ClientConfig());
-		ClientResponse response = client.target(LOGIN_SERVICE + token).request(MediaType.APPLICATION_JSON_TYPE)
-				.get(ClientResponse.class);
-		if(response.getStatus() != Status.OK.getStatusCode())
+		try{
+			ClientResponse response = client.target(LOGIN_SERVICE + token).request(MediaType.APPLICATION_JSON_TYPE)
+					.get(ClientResponse.class);
+			if(response.getStatus() != Status.OK.getStatusCode())
+				return null;
+			
+			UserName username = response.readEntity(UserName.class);
+			
+			return username.username;
+		}catch(WebApplicationException e){
 			return null;
-		
-		UserName username = response.readEntity(UserName.class);
-		
-		return username.username;
+		}
 	}
 
 	protected Repository getRepository() {
