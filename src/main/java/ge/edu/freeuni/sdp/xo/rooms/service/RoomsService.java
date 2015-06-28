@@ -121,7 +121,7 @@ public class RoomsService {
 			return null;
 
 		Client client = ClientBuilder.newClient(new ClientConfig());
-		ClientResponse response = client.target(LOGIN_SERVICE + "?token=" + token).request(MediaType.APPLICATION_JSON)
+		ClientResponse response = client.target(LOGIN_SERVICE + "?token=" + token).request(MediaType.APPLICATION_JSON_TYPE)
 				.get(ClientResponse.class);
 		if(response.getStatus() != Status.OK.getStatusCode())
 			return null;
