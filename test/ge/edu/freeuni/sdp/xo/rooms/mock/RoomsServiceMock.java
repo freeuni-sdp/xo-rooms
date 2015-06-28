@@ -16,4 +16,9 @@ public class RoomsServiceMock extends RoomsService {
 		return "1";
 	}
 	
+	
+	@Override
+	protected boolean isTokenValid(String token){
+		return true;
+	}
 }

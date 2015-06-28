@@ -26,8 +26,9 @@ public class TestRoomsService extends JerseyTest{
 
 	@Test
 	public void testGetAllRooms() {
-		List<Room> actual = target("/").request().get(new GenericType<List<Room>>(){});
-
+		Response response = target("/").request().get(Response.class);
+		List<Room> actual = response.readEntity(new GenericType<List<Room>>(){});
+		
 		List<Room> expected = new ArrayList<Room>();
 		expected.add(new Room(3, "1", "2"));
 		expected.add(new Room(2, "1", null));
