@@ -18,6 +18,11 @@ public class Room {
 	@XmlElement(nillable=true)
 	private String o_user;
 	
+	
+	public Room(){
+		//Dummy
+	}
+	
 	/**
 	 * @param id
 	 * @param x_user
@@ -69,5 +74,48 @@ public class Room {
 	 */
 	public void seto_user(String o_user) {
 		this.o_user = o_user;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((o_user == null) ? 0 : o_user.hashCode());
+		result = prime * result + ((x_user == null) ? 0 : x_user.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Room other = (Room) obj;
+		if (id != other.id)
+			return false;
+		if (o_user == null) {
+			if (other.o_user != null)
+				return false;
+		} else if (!o_user.equals(other.o_user))
+			return false;
+		if (x_user == null) {
+			if (other.x_user != null)
+				return false;
+		} else if (!x_user.equals(other.x_user))
+			return false;
+		return true;
 	}	
+	
+	
+	
 }
