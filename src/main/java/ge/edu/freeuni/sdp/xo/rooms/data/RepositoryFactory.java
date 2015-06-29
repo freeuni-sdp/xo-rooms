@@ -5,7 +5,7 @@ import com.microsoft.azure.storage.StorageException;
 public class RepositoryFactory {
 	private static Repository repo;
 	
-	public static Repository createInMemoryRepository(){
+	public static Repository createRepository(){
 		if(repo == null){
 			repo = InMemoryRepository.getInstance();
 		

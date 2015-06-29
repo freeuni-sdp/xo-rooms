@@ -8,7 +8,7 @@ public class RoomsServiceMock extends RoomsService {
 	
 	@Override
 	protected Repository getRepository(){
-		return RepositoryFactory.createInMemoryRepository();
+		return RepositoryFactory.createRepository();
 	}
 
 	@Override
