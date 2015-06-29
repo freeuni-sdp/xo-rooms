@@ -23,7 +23,7 @@ import com.microsoft.azure.storage.StorageException;
 @Produces({ MediaType.APPLICATION_JSON })
 public class RoomsService {
 
-	private static final String LOGIN_SERVICE = "http://xo-login.herokuapp.com/webapi/login";
+	private static final String LOGIN_SERVICE = "http://xo-login.herokuapp.com/webapi/login/";
 
 	@Context
 	UriInfo uriInfo;
