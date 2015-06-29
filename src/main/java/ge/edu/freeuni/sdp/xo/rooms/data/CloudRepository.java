@@ -30,11 +30,11 @@ public class CloudRepository implements Repository{
 
 	@Override
 	public RoomEntity find(String id) throws StorageException {
-		RoomEntityId tskId = new RoomEntityId(id);
+		RoomEntityId roomId = new RoomEntityId(id);
 		TableOperation operation = 
 				TableOperation.retrieve(
-					tskId.getPartitionKey(), 
-					tskId.getRowKey(), 
+					roomId.getPartitionKey(), 
+					roomId.getRowKey(), 
 					RoomEntity.class);
 		return table.execute(operation).getResultAsType();
 	}

@@ -15,7 +15,7 @@ public class RepositoryFactory {
 	public static Repository createRepository() throws StorageException{
 		CloudRepository cloudRepository = new CloudRepository(getTable());
 		for(int i=0; i<ROOMS_COUNT;i++){
-			String roomId = ""+(i+1);
+			String roomId = ""+(i+11111111);
 			Room room = new Room(roomId,null,null);
 			if(cloudRepository.find(roomId) == null)
 				cloudRepository.insertOrUpdate(RoomEntity.fromRoom(room));
