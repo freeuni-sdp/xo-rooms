@@ -16,7 +16,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
-public class TestRoomsService extends JerseyTest{
+public class FakeTestRoomsService extends JerseyTest{
 
 	@Override
 	protected Application configure() {

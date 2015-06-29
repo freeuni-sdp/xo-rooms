@@ -1,16 +1,14 @@
 package ge.edu.freeuni.sdp.xo.rooms.mock;
 
-import com.microsoft.azure.storage.StorageException;
-
-import ge.edu.freeuni.sdp.xo.rooms.data.RepositoryFactory;
+import ge.edu.freeuni.sdp.xo.rooms.data.InMemoryRepositoryFactory;
 import ge.edu.freeuni.sdp.xo.rooms.data.Repository;
 import ge.edu.freeuni.sdp.xo.rooms.service.RoomsService;
 
 public class RoomsServiceMock extends RoomsService {
 	
 	@Override
-	protected Repository getRepository() throws StorageException{
-		return RepositoryFactory.createRepository();
+	protected Repository getRepository(){
+		return InMemoryRepositoryFactory.createInMemoryRepository();
 	}
 
 	@Override
