@@ -134,7 +134,7 @@ public class RoomsService {
 		}
 	}
 
-	protected Repository getRepository() {
+	protected Repository getRepository() throws StorageException {
 		return RepositoryFactory.createRepository();
 	}
 

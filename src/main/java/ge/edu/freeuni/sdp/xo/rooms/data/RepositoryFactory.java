@@ -1,27 +1,42 @@
 package ge.edu.freeuni.sdp.xo.rooms.data;
 
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+
+import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.table.CloudTable;
+import com.microsoft.azure.storage.table.CloudTableClient;
 
 public class RepositoryFactory {
-	private static Repository repo;
+	public static Repository createRepository() throws StorageException{
+		return new CloudRepository(getTable());
+	}
 	
-	public static Repository createRepository(){
-		if(repo == null){
-			repo = InMemoryRepository.getInstance();
-		
-			Room empty = new Room("1111111111", null, null);
-			Room one = new Room(  "2222222222", "1", null);
-			Room full = new Room( "3333333333", "1", "2");
-			
-			try {
-				repo.insertOrUpdate(RoomEntity.fromRoom(full));
-				repo.insertOrUpdate(RoomEntity.fromRoom(one));
-				repo.insertOrUpdate(RoomEntity.fromRoom(empty));
-			} catch (StorageException e) {
-				e.printStackTrace();
-			}
+	private static CloudTable getTable() throws StorageException {
+
+		final String storageConnectionString = "DefaultEndpointsProtocol=http;"
+				+ "AccountName=freeunisdptodo;"
+				+ "AccountKey=+UKHsHFQUWDjoHT1S7q4Ivc1phivLmXwWESvpcRCCJwhs1BnShkaFOOQs+BmI4XWtNnyg78S6ovbD2J5QCKxsQ==";
+
+		CloudStorageAccount storageAccount;
+		try {
+			storageAccount = CloudStorageAccount.parse(storageConnectionString);
+		} catch (InvalidKeyException | URISyntaxException e) {
+			e.printStackTrace();
+			return null;
 		}
-		
-		return repo;
+
+		CloudTableClient tableClient = storageAccount.createCloudTableClient();
+		final String tableName = "rooms";
+		CloudTable cloudTable;
+		try {
+			cloudTable = new CloudTable(tableName, tableClient);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return null;
+		}
+		cloudTable.createIfNotExists();
+		return cloudTable;
 	}
 }
