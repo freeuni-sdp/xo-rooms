@@ -9,8 +9,17 @@ import com.microsoft.azure.storage.table.CloudTable;
 import com.microsoft.azure.storage.table.CloudTableClient;
 
 public class RepositoryFactory {
+	public static final int ROOMS_COUNT=10;
+	
 	public static Repository createRepository() throws StorageException{
-		return new CloudRepository(getTable());
+		CloudRepository cloudRepository = new CloudRepository(getTable());
+		for(int i=0; i<ROOMS_COUNT;i++){
+			String roomId = ""+i+1;
+			Room room = new Room(roomId,null,null);
+			if(cloudRepository.find(roomId) == null)
+				cloudRepository.insertOrUpdate(RoomEntity.fromRoom(room));
+		}
+		return cloudRepository;
 	}
 	
 	private static CloudTable getTable() throws StorageException {
