@@ -128,7 +128,12 @@ public class RoomsService {
 		} else
 			return Response.status(Status.FORBIDDEN).build();
 	}
-	
+	@Path("{room_id}")
+	@DELETE
+	public Response deleteRoom(@PathParam("room_id") String roomId) throws StorageException{
+		getRepository().delete(roomId);
+		return Response.ok().build();
+	}
 	
 	@DELETE
 	public Response deleteAllRoomsAndAddOnlyTen() throws StorageException{
