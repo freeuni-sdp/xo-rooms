@@ -70,20 +70,32 @@ public class RoomsService {
 			}
 
 			if (roomEntity.getx_user() == null) {
-
 				String x_user = getIdFromToken(token);
-				roomEntity.setx_user(x_user);
-				getRepository().insertOrUpdate(roomEntity);
-				URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
-				return Response.created(uri).entity(roomEntity.getRoom())
-						.build();
+				
+				if(roomEntity.geto_user() == null || !roomEntity.geto_user().equals(x_user)){
+					roomEntity.setx_user(x_user);
+					getRepository().insertOrUpdate(roomEntity);
+					URI uri = uriInfo.getAbsolutePathBuilder().path(x_user).build();
+					return Response.created(uri).entity(roomEntity.getRoom())
+							.build();
+				}else{
+					return Response.status(Status.CONFLICT).build();
+				}
+				
+				
 			} else if (roomEntity.geto_user() == null) {
 				String o_user = getIdFromToken(token);
-				roomEntity.seto_user(o_user);
-				getRepository().insertOrUpdate(roomEntity);
-				URI uri = uriInfo.getAbsolutePathBuilder().path(o_user).build();
-				return Response.created(uri).entity(roomEntity.getRoom())
-						.build();
+				
+				if(roomEntity.getx_user() == null || !roomEntity.getx_user().equals(o_user)){
+					roomEntity.seto_user(o_user);
+					getRepository().insertOrUpdate(roomEntity);
+					URI uri = uriInfo.getAbsolutePathBuilder().path(o_user).build();
+					return Response.created(uri).entity(roomEntity.getRoom())
+							.build();
+				}else{
+					return Response.status(Status.CONFLICT).build();
+				}
+				
 			} else {
 				return Response.status(Status.CONFLICT).build();
 			}
@@ -116,6 +128,7 @@ public class RoomsService {
 		} else
 			return Response.status(Status.FORBIDDEN).build();
 	}
+	
 	
 	@DELETE
 	public Response deleteAllRoomsAndAddOnlyTen() throws StorageException{
