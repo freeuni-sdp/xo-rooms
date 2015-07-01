@@ -15,6 +15,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientResponse;
 
 import com.microsoft.azure.storage.StorageException;
 
@@ -134,8 +135,8 @@ public class RoomsService {
 		}
 	}
 
-	protected Repository getRepository() throws StorageException {
-		return RepositoryFactory.createRepository();
+	protected Repository getRepository() {
+		return RepositoryFactory.createInMemoryRepository();
 	}
 
 	protected boolean isTokenValid(String token) {
