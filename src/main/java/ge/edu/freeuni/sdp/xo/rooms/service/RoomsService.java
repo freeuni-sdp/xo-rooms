@@ -128,27 +128,6 @@ public class RoomsService {
 		} else
 			return Response.status(Status.FORBIDDEN).build();
 	}
-	@Path("{room_id}")
-	@DELETE
-	public Response deleteRoom(@PathParam("room_id") String roomId) throws StorageException{
-		getRepository().delete(roomId);
-		return Response.ok().build();
-	}
-	
-	@DELETE
-	public Response deleteAllRoomsAndAddOnlyTen() throws StorageException{
-		for (RoomEntity roomEntity : getRepository().getAll()){
-			getRepository().delete(roomEntity.getRoom().getId());
-		}
-		
-		for(int i=0; i<ROOMS_COUNT;i++){
-			String roomId = UUID.randomUUID().toString();
-			Room room = new Room(roomId,null,null);
-			getRepository().insertOrUpdate(RoomEntity.fromRoom(room));
-		}
-		
-		return null;
-	}
 
 	protected String getIdFromToken(String token) {
 		if (token == null)
