@@ -15,13 +15,14 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 
 import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientResponse;
 
 import com.microsoft.azure.storage.StorageException;
 
 @Path("")
 @Produces({ MediaType.APPLICATION_JSON })
 public class RoomsService {
+	
+	public static final int ROOMS_COUNT=10;
 
 	private static final String LOGIN_SERVICE = "http://xo-login.herokuapp.com/webapi/login/";
 
@@ -115,6 +116,21 @@ public class RoomsService {
 		} else
 			return Response.status(Status.FORBIDDEN).build();
 	}
+	
+	@DELETE
+	public Response deleteAllRoomsAndAddOnlyTen() throws StorageException{
+		for (RoomEntity roomEntity : getRepository().getAll()){
+			getRepository().delete(roomEntity.getRoom().getId());
+		}
+		
+		for(int i=0; i<ROOMS_COUNT;i++){
+			String roomId = UUID.randomUUID().toString();
+			Room room = new Room(roomId,null,null);
+			getRepository().insertOrUpdate(RoomEntity.fromRoom(room));
+		}
+		
+		return null;
+	}
 
 	protected String getIdFromToken(String token) {
 		if (token == null)
@@ -135,8 +151,8 @@ public class RoomsService {
 		}
 	}
 
-	protected Repository getRepository() {
-		return RepositoryFactory.createInMemoryRepository();
+	protected Repository getRepository() throws StorageException {
+		return RepositoryFactory.createRepository();
 	}
 
 	protected boolean isTokenValid(String token) {
