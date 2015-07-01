@@ -115,7 +115,8 @@ public class RoomsService {
 
 			if (roomEntity.getx_user() != null
 					&& roomEntity.getx_user().equals(userId)) {
-				roomEntity.setx_user(null);
+				roomEntity.setx_user(roomEntity.geto_user());
+				roomEntity.seto_user(null);
 				getRepository().insertOrUpdate(roomEntity);
 				return Response.ok().build();
 			} else if (roomEntity.geto_user() != null
